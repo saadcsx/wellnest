@@ -1,0 +1,24 @@
+# Render Blueprint — deploys the API and the built React client as ONE web service
+# (Express serves client/dist in production, so cookies are same-origin and no CORS is needed).
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: wellnest
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGODB_URI
+        sync: false   # paste your Atlas connection string in the Render dashboard
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3.6-flash
+      - key: ASSEMBLYAI_API_KEY
+        sync: false

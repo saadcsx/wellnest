@@ -1,0 +1,168 @@
+/* Geist — self-hosted variable fonts (the Next.js version loads these through next/font). */
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/GeistVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMonoVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-geist-sans: "Geist";
+  --font-geist-mono: "Geist Mono";
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Wellnest design tokens
+  ---------------------
+  One accent (evergreen) on warm-neutral surfaces. Hairline borders,
+  frosted panels, no gradients. Every colour is defined once here and
+  consumed through Tailwind (see tailwind.config.ts).
+*/
+@layer base {
+  :root {
+    --background: 40 14% 97%;
+    --foreground: 210 12% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 12% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 12% 12%;
+
+    --primary: 160 52% 30%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 40 10% 94%;
+    --secondary-foreground: 210 12% 20%;
+
+    --muted: 40 10% 95%;
+    --muted-foreground: 210 8% 44%;
+
+    --accent: 160 38% 94%;
+    --accent-foreground: 160 52% 24%;
+
+    --destructive: 4 66% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --warning: 36 84% 42%;
+    --success: 160 52% 30%;
+
+    --border: 210 12% 12%;
+    --input: 210 12% 12%;
+    --ring: 160 52% 30%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 210 12% 8%;
+    --foreground: 40 10% 94%;
+
+    --card: 210 10% 11%;
+    --card-foreground: 40 10% 94%;
+
+    --popover: 210 10% 11%;
+    --popover-foreground: 40 10% 94%;
+
+    --primary: 160 45% 45%;
+    --primary-foreground: 210 12% 8%;
+
+    --secondary: 210 8% 16%;
+    --secondary-foreground: 40 10% 90%;
+
+    --muted: 210 8% 15%;
+    --muted-foreground: 210 6% 62%;
+
+    --accent: 160 30% 16%;
+    --accent-foreground: 160 45% 70%;
+
+    --destructive: 4 66% 56%;
+    --destructive-foreground: 0 0% 100%;
+
+    --warning: 36 84% 55%;
+    --success: 160 45% 45%;
+
+    --border: 40 10% 94%;
+    --input: 40 10% 94%;
+    --ring: 160 45% 45%;
+  }
+
+  * {
+    @apply border-hairline;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv11", "ss01", "ss03";
+  }
+
+  ::selection {
+    @apply bg-primary/15;
+  }
+}
+
+@layer components {
+  /* Frosted surface used for nav bars, floating panels and cards. */
+  .glass {
+    @apply bg-white/65 backdrop-blur-xl backdrop-saturate-150 border border-hairline;
+  }
+
+  .dark .glass {
+    @apply bg-card/60;
+  }
+
+  /* Subtle elevation without heavy drop shadows. */
+  .surface {
+    @apply bg-card border border-hairline rounded-2xl;
+    box-shadow: 0 1px 2px rgb(16 24 40 / 0.04), 0 1px 0 rgb(255 255 255 / 0.6) inset;
+  }
+
+  .eyebrow {
+    @apply text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Thin, low-contrast outline — the default border for every element. */
+  .border-hairline {
+    border-color: hsl(var(--border) / 0.08);
+  }
+
+  .dark .border-hairline {
+    border-color: hsl(var(--border) / 0.1);
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-foreground/15 rounded-full;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
